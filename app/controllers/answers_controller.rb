@@ -17,6 +17,10 @@ class AnswersController < ApplicationController
     @answer = Answer.new(answer_params)
     @answer.approved = false
 
+    # need to make a cookie here
+    # gotta make sure that the cookie code comes back, too
+    # and maybe send a email as well, wooo
+
     if @answer.save
       render json: @answer, status: :created, location: @answer
     else
