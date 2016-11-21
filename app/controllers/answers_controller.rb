@@ -14,15 +14,20 @@ class AnswersController < ApplicationController
 
   # POST /answers
   def create
-    @answer = Answer.new(answer_params)
+    @question = Question.find(params[:question_id])
+    @answer = @question.answers.new(answer: params[:answer], question_id: params[:question_id])
     @answer.approved = false
 
-    # need to make a cookie here
-    # gotta make sure that the cookie code comes back, too
-    # and maybe send a email as well, wooo
-
+    # Maybe send a email as well, wooo
     if @answer.save
-      render json: @answer, status: :created, location: @answer
+      code = SecureRandom.urlsafe_base64
+      @cookie = Cookie.new(answer_id: @answer.id, code: code)
+      if @cookie.save!
+        results = {answer: @answer, cookie: @cookie}
+        render json: results, status: :created, location: [@question, @answer]
+      else
+        render json: @cookie.errors, status: :unprocessable_entity
+      end
     else
       render json: @answer.errors, status: :unprocessable_entity
     end
