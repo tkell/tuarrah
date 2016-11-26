@@ -15,7 +15,9 @@ class AnswersController < ApplicationController
   # POST /answers
   def create
     @question = Question.find(params[:question_id])
-    @answer = @question.answers.new(answer: params[:answer], question_id: params[:question_id])
+    @answer = @question.answers.new(answer: params[:answer],
+                                    email: params[:email],
+                                    question_id: params[:question_id])
     @answer.approved = false
 
     # Maybe send a email as well, wooo
