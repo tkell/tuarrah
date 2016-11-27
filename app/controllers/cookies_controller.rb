@@ -7,9 +7,9 @@ class CookiesController < ApplicationController
     @cooky = Cookie.where(code: code).first
 
     if @cooky.nil?
-      render json: {verification: false }
+      render json: {verification: false}
     else
-      render json: {verification: false }
+      render json: {verification: true}
     end
   end
 
