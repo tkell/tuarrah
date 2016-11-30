@@ -19,13 +19,16 @@ class AnswersController < ApplicationController
                                     email: params[:email],
                                     question_id: params[:question_id])
     @answer.approved = false
-
-    # Maybe send a email as well, wooo
     if @answer.save
       code = SecureRandom.urlsafe_base64
       @cookie = Cookie.new(answer_id: @answer.id, code: code)
       if @cookie.save!
         results = {answer: @answer, cookie: @cookie}
+
+        ## probably need to integrate this with SideKiq, woo
+        AnswerMailer.answer_email(@answer, code).deliver_later
+
+
         render json: results, status: :created, location: [@question, @answer]
       else
         render json: @cookie.errors, status: :unprocessable_entity
