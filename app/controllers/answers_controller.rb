@@ -9,7 +9,7 @@ class AnswersController < ApplicationController
     # That will fuck up a bit when we run out of answers,
     # but that is enough of an edge case that I am not going to worry about it for now
     offset  = params[:offset].to_i || 0
-    @answers = Answer.where(approved: true).limit(5).offset(offset)
+    @answers = Answer.where(approved: true, question_id: @question.id).limit(5).offset(offset)
     render json: @answers
   end
 
