@@ -3,7 +3,13 @@ class AnswersController < ApplicationController
 
   # GET /answers
   def index
-    @answers = Answer.where(approved: true)
+    # This always returns 5 things
+    # It takes an offset param that is 0 if it is not null
+    # I am going to increment the offset on the client side, because I am a baller.
+    # That will fuck up a bit when we run out of answers,
+    # but that is enough of an edge case that I am not going to worry about it for now
+    offset  = params[:offset].to_i || 0
+    @answers = Answer.where(approved: true, question_id: params[:question_id]).limit(5).offset(offset)
     render json: @answers
   end
 
