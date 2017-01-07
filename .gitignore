@@ -23,3 +23,6 @@
 
 # Ignore shell script with ENV passwords
 set_env_secrets.sh
+
+# Ignore redis
+dump.rdb
