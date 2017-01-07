@@ -21,5 +21,10 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: tuarrah_production 
+  username: tuarrah
+  password: <%= ENV["POSTGRESS_PASSWORD"] %>
+  host: ""
+  port: 5432
