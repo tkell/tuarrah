@@ -32,8 +32,7 @@ class AnswersController < ApplicationController
         results = {answer: @answer, cookie: @cookie}
 
         ## probably need to integrate this with SideKiq, woo
-        AnswerMailer.answer_email(@answer, code).deliver_later
-
+        MailWorker.send_in(5.minutes, @answer, code)
 
         render json: results, status: :created, location: [@question, @answer]
       else
