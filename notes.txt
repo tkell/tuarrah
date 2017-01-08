@@ -1,7 +1,19 @@
+-- Boot SideKiq with:
+. set_env_secrets.sh
+bundle exec sidekiq -e production
+
+-- Boot Rails with:
+. set_env_secrets.sh
+rails s -e production -b localhost
+
+
+-- Because SideKiq is odd, we had to put the two SMTP keys in /etc/environments. Tacky, but acceptable.
+
+-- We're running Postgres, Rails, Puma, Nginx, on an AWS micro. 
+
  -- I had to update the rails_admin gem itself, on the server, to set the URLs correctly.
 -- I added the host and port.
  -- No, I'm not happy about this.
-
  -- The changes are in application_helper.rb:
 <a class="#{action.pjax? ? 'pjax' : ''}" href="#{rails_admin.url_for(action: action.action_name, controller: 'rails_admin/main', model_name: abstract_model.try(:to_param), id: (object.try(:persisted?) && object.try(:id) || nil), host: 'tide-pool.link', port: 80)}">
 
