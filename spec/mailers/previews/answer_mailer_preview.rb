@@ -1,4 +1,6 @@
-# Preview all emails at http://localhost:3000/rails/mailers/answer_mailer
 class AnswerMailerPreview < ActionMailer::Preview
-
+  def answer_email
+      answer = Answer.first
+      AnswerMailer.answer_email(answer, "some_fake_url_code")
+  end
 end

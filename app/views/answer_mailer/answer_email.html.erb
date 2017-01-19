@@ -3,15 +3,16 @@
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
-  <body>
-    <h1>Tuarrah</h1>
+  <body style='font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; margin: 20px'>
     <p>
 			Thanks for answering.
-
-      The record is now available to you at tuarrah.com/listen[link].
-      In the event that your cookies are deleted, you can always access the music from this personalized link
-
-      Your answer will be published anonymously on tuarrah.com/listen[link], pending moderation.
     </p>
+    <p>
+      The record is now available to you <%= link_to 'here', @listen_url %>. You will always be able to access the music from this personalized link.
+    </p>
+    <p>
+      Your answer will be published anonymously on <%= link_to 'tuarrah.com', @listen_url%>, pending moderation.
+    </p>
+      <img height="100%" width="100%" src="https://static1.squarespace.com/static/57ebb3abd482e9f4d47b2a6a/t/5840fec4725e25c7bd5738a2/1480654713901/tuarrah+press+photo">
   </body>
 </html>
