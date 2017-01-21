@@ -17,7 +17,8 @@ rails s -e production -b localhost
  -- The changes are in application_helper.rb:
 <a class="#{action.pjax? ? 'pjax' : ''}" href="#{rails_admin.url_for(action: action.action_name, controller: 'rails_admin/main', model_name: abstract_model.try(:to_param), id: (object.try(:persisted?) && object.try(:id) || nil), host: 'tide-pool.link', port: 80)}">
 
-and
+and:
+url = rails_admin.url_for(action: :index, controller: 'rails_admin/main', model_name: model_param, host: 'tide-pool.link', port: 80)
 
-        url         = rails_admin.url_for(action: :index, controller: 'rails_admin/main', model_name: model_param, host: 'tide-pool.link', port: 80)
-
+and:
+link_to rails_admin.url_for(action: a.action_name, controller: 'rails_admin/main', host: 'tide-pool.link', port: 80, model_name: am.try(:to_param), id: (o.try(:persisted?) && o.try(:id) || nil)), class: 'pjax' do
