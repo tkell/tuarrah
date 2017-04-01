@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'charlie-vankirk-x5nj.squarespace.com'
+    origins 'charlie-vankirk-x5nj.squarespace.com', 'www.tuarrah.com', 'tuarrah.com'
     resource '*', :headers => :any, :methods => [:get, :post, :options]
   end
 end
